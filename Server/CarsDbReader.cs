@@ -25,5 +25,26 @@ namespace Server
 
 			return manufacturers;
 		}
+
+		public List<BodyType> ReadBodyTypes()
+		{
+			string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
+			using var connection = new SQLiteConnection(cs);
+			connection.Open();
+
+			List<BodyType> bodyTypes = new List<BodyType>();
+			using (SQLiteCommand fmd = connection.CreateCommand())
+			{
+				SQLiteCommand sqlComm = new SQLiteCommand("select * from BodyType", connection);
+				SQLiteDataReader rdr = sqlComm.ExecuteReader();
+
+				while (rdr.Read())
+				{
+					bodyTypes.Add(new BodyType(rdr.GetString(1)));
+				}
+			}
+
+			return bodyTypes;
+		}
 	}
 }

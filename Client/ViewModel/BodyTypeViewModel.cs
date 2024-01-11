@@ -3,6 +3,7 @@ using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
 using Server.Model;
+using Server;
 
 namespace Client.ViewModel
 {
@@ -15,7 +16,9 @@ namespace Client.ViewModel
 		public BodyTypeViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
-			_bodyTypes = [new BodyType("Sedan"), new BodyType("SUV")];
+			CarsDbReader carsDbReader = new CarsDbReader();
+			_bodyTypes = new ObservableCollection<BodyType>(carsDbReader.ReadBodyTypes());
+			//_bodyTypes = [new BodyType("Sedan"), new BodyType("SUV")];
 		}
 
 		public ObservableCollection<BodyType>? BodyTypes
