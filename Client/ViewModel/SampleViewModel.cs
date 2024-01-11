@@ -3,14 +3,15 @@ using Client.Model;
 using MvvmCross.Commands;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace Client.ViewModel
 {
 	public sealed class SampleViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private List<Sample> _allSamples;
-		private List<Sample> _filteredSamples;
+		private ObservableCollection<Sample> _allSamples;
+		private ObservableCollection<Sample> _filteredSamples;
 
 		private MvxSubscriptionToken? _tokenBodyTypeChanged;
 		private MvxSubscriptionToken? _tokenManufacturerChanged;
@@ -52,21 +53,21 @@ namespace Client.ViewModel
 				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")
 				];
 
-			_filteredSamples = new List<Sample>();
+			_filteredSamples = new ObservableCollection<Sample>();
 		}
 
 		private void ShomModels()
 		{
 			if (_selectedBodyType != null && _selectedManufacturer != null)
 			{
-				FilteredSamples = (from s in _allSamples
-								   where s.Manufacturer == _selectedManufacturer
-								   where s.BodyType == _selectedBodyType
-								   select s).ToList();
+				FilteredSamples = new ObservableCollection<Sample>((from s in _allSamples
+																	where s.Manufacturer == _selectedManufacturer
+																	where s.BodyType == _selectedBodyType
+																	select s));
 			}
 		}
 
-		public List<Sample> FilteredSamples
+		public ObservableCollection<Sample> FilteredSamples
 		{
 			get => _filteredSamples;
 			set => SetProperty(ref _filteredSamples, value);

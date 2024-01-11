@@ -2,13 +2,14 @@
 using Client.Model;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace Client.ViewModel
 {
 	public sealed class ManufacturerViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private Manufacturer[]? _manufacturers;
+		private ObservableCollection<Manufacturer>? _manufacturers;
 		private Manufacturer? _selectedItem;
 
 		public ManufacturerViewModel(IMvxMessenger? messenger)
@@ -17,7 +18,7 @@ namespace Client.ViewModel
 			_manufacturers = [new Manufacturer("Audi"), new Manufacturer("BMW"), new Manufacturer("Porsche")];
 		}
 
-		public Manufacturer[]? Manufacturers
+		public ObservableCollection<Manufacturer>? Manufacturers
 		{
 			get => _manufacturers;
 			set => SetProperty(ref _manufacturers, value);

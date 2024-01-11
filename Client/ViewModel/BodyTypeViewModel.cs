@@ -2,13 +2,14 @@
 using Client.Model;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace Client.ViewModel
 {
 	public sealed class BodyTypeViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private BodyType[]? _bodyTypes;
+		private ObservableCollection<BodyType>? _bodyTypes;
 		private BodyType? _selectedItem;
 
 		public BodyTypeViewModel(IMvxMessenger? messenger)
@@ -17,7 +18,7 @@ namespace Client.ViewModel
 			_bodyTypes = [new BodyType("Sedan"), new BodyType("SUV")];
 		}
 
-		public BodyType[]? BodyTypes
+		public ObservableCollection<BodyType>? BodyTypes
 		{
 			get => _bodyTypes;
 			set => SetProperty(ref _bodyTypes, value);
