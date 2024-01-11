@@ -3,6 +3,7 @@ using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
 using Server.Model;
+using Server;
 
 namespace Client.ViewModel
 {
@@ -15,6 +16,9 @@ namespace Client.ViewModel
 		public ManufacturerViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
+			CarsDbReader carsDbReader = new CarsDbReader();
+			var v = carsDbReader.ReadManufacturers();
+
 			_manufacturers = [new Manufacturer("Audi"), new Manufacturer("BMW"), new Manufacturer("Porsche")];
 		}
 

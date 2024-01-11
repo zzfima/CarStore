@@ -27,7 +27,7 @@ namespace Client
 
 			//ViewModels
 			instance.ConstructAndRegisterSingleton(typeof(BodyTypeViewModel));
-			instance.ConstructAndRegisterSingleton(typeof(ManufacturerViewModel));
+			//instance.ConstructAndRegisterSingleton(typeof(ManufacturerViewModel));
 			instance.ConstructAndRegisterSingleton(typeof(SampleViewModel));
 			instance.ConstructAndRegisterSingleton(typeof(OrderViewModel));
 		}
