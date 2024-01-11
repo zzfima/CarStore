@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci504" />
     <PackageReference Include="MvvmCross" Version="9.2.0-beta.5" />
     <PackageReference Include="MvvmCross.Plugin.Messenger" Version="9.1.1" />
   </ItemGroup>
