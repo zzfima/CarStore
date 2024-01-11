@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Client.VIew
+namespace Client.View
 {
 	/// <summary>
 	/// Interaction logic for ModelView.xaml
