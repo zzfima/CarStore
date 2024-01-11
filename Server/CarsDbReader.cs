@@ -17,10 +17,8 @@ namespace Server
 				SQLiteCommand sqlComm = new SQLiteCommand("select * from Manufacturer", connection);
 				SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
-				while (rdr.Read())
-				{
-					manufacturers.Add(new Manufacturer(rdr.GetString(1)));
-				}
+				while (rdr?.Read() ?? false)
+					manufacturers.Add(new Manufacturer(rdr?.GetValue(1)?.ToString() ?? String.Empty));
 			}
 
 			return manufacturers;
@@ -38,10 +36,8 @@ namespace Server
 				SQLiteCommand sqlComm = new SQLiteCommand("select * from BodyType", connection);
 				SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
-				while (rdr.Read())
-				{
-					bodyTypes.Add(new BodyType(rdr.GetString(1)));
-				}
+				while (rdr?.Read() ?? false)
+					bodyTypes.Add(new BodyType(rdr?.GetValue(1)?.ToString() ?? String.Empty));
 			}
 
 			return bodyTypes;
@@ -56,19 +52,18 @@ namespace Server
 			List<Sample> samples = new List<Sample>();
 			using (SQLiteCommand fmd = connection.CreateCommand())
 			{
-				var query = $"SELECT Sample.Name FROM Sample " +
-					$"INNER JOIN Manufacturer ON Sample.ManufacturerID = Manufacturer.ID " +
-					$"INNER JOIN BodyType ON Sample.BodyTypeID = BodyType.ID " +
-					$"WHERE Manufacturer.Name = \"{manufacturer.Name}\" AND BodyType.Name = \"{bodyType.Name}\"";
+				var query = $@"
+					SELECT Sample.Name FROM Sample 
+					INNER JOIN Manufacturer ON Sample.ManufacturerID = Manufacturer.ID
+					INNER JOIN BodyType ON Sample.BodyTypeID = BodyType.ID
+					WHERE Manufacturer.Name = '{manufacturer.Name}' AND BodyType.Name = '{bodyType.Name}'";
 
 
 				SQLiteCommand sqlComm = new SQLiteCommand(query, connection);
 				SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
-				while (rdr.Read())
-				{
-					samples.Add(new Sample(bodyType, manufacturer, rdr.GetString(0)));
-				}
+				while (rdr?.Read() ?? false)
+					samples.Add(new Sample(bodyType, manufacturer, rdr?.GetValue(0)?.ToString() ?? String.Empty));
 			}
 
 			return samples;
