@@ -2,15 +2,15 @@
 using MvvmCross.Commands;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
-using System.Collections.ObjectModel;
+using Server;
 using Server.Model;
+using System.Collections.ObjectModel;
 
 namespace Client.ViewModel
 {
-    public sealed class SampleViewModel : MvxViewModel
+	public sealed class SampleViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private ObservableCollection<Sample> _allSamples;
 		private ObservableCollection<Sample> _filteredSamples;
 
 		private MvxSubscriptionToken? _tokenBodyTypeChanged;
@@ -42,20 +42,20 @@ namespace Client.ViewModel
 					_messenger?.Publish(new OrderCreated(this, _selectedSample));
 			});
 
-			_allSamples = [
-				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A1"),
-				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A2"),
-				new Sample(new BodyType("Sedan"), new Manufacturer("BMW"), "120"),
-				new Sample(new BodyType("Sedan"), new Manufacturer("BMW"), "220"),
-				new Sample(new BodyType("Sedan"), new Manufacturer("Porsche"), "Panamera"),
-				new Sample(new BodyType("Sedan"), new Manufacturer("Porsche"), "Taycan"),
-				new Sample(new BodyType("SUV"), new Manufacturer("Audi"), "Q4"),
-				new Sample(new BodyType("SUV"), new Manufacturer("Audi"), "Q6"),
-				new Sample(new BodyType("SUV"), new Manufacturer("BMW"), "X5"),
-				new Sample(new BodyType("SUV"), new Manufacturer("BMW"), "X6"),
-				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Cayenne"),
-				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")
-				];
+			//_allSamples = [
+			//	new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A1"),
+			//	new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A2"),
+			//	new Sample(new BodyType("Sedan"), new Manufacturer("BMW"), "120"),
+			//	new Sample(new BodyType("Sedan"), new Manufacturer("BMW"), "220"),
+			//	new Sample(new BodyType("Sedan"), new Manufacturer("Porsche"), "Panamera"),
+			//	new Sample(new BodyType("Sedan"), new Manufacturer("Porsche"), "Taycan"),
+			//	new Sample(new BodyType("SUV"), new Manufacturer("Audi"), "Q4"),
+			//	new Sample(new BodyType("SUV"), new Manufacturer("Audi"), "Q6"),
+			//	new Sample(new BodyType("SUV"), new Manufacturer("BMW"), "X5"),
+			//	new Sample(new BodyType("SUV"), new Manufacturer("BMW"), "X6"),
+			//	new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Cayenne"),
+			//	new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")
+			//	];
 
 			_filteredSamples = new ObservableCollection<Sample>();
 		}
@@ -64,11 +64,19 @@ namespace Client.ViewModel
 		{
 			if (_selectedBodyType != null && _selectedManufacturer != null)
 			{
+				CarsDbReader carsDbReader = new CarsDbReader();
+				FilteredSamples = new ObservableCollection<Sample>(carsDbReader.ReadSamples(_selectedBodyType, _selectedManufacturer));
+			}
+
+			/*
+			if (_selectedBodyType != null && _selectedManufacturer != null)
+			{
 				FilteredSamples = new ObservableCollection<Sample>((from s in _allSamples
 																	where s.Manufacturer == _selectedManufacturer
 																	where s.BodyType == _selectedBodyType
 																	select s));
 			}
+			*/
 		}
 
 		public ObservableCollection<Sample> FilteredSamples
