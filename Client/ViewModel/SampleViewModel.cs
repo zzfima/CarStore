@@ -1,4 +1,5 @@
-﻿using Client.Model;
+﻿using Client.Messages;
+using Client.Model;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 
@@ -7,12 +8,32 @@ namespace Client.ViewModel
 	public sealed class SampleViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private Sample[] _samples;
+		private List<Sample> _allSamples;
+		private List<Sample> _filteredSamples;
+
+		private MvxSubscriptionToken? _tokenBodyTypeChanged;
+		private MvxSubscriptionToken? _tokenManufacturerChanged;
+
+		private BodyType? _selectedBodyType;
+		private Manufacturer? _selectedManufacturer;
 
 		public SampleViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
-			_samples = [
+
+			_tokenBodyTypeChanged = messenger?.Subscribe<BodyTypeChanged>((res) =>
+			{
+				_selectedBodyType = res.SelectedBodyType;
+				ShomModels();
+			});
+
+			_tokenManufacturerChanged = messenger?.Subscribe<ManufacturerChanged>((res) =>
+			{
+				_selectedManufacturer = res.SelectedManufacturer;
+				ShomModels();
+			});
+
+			_allSamples = [
 				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A1"),
 				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A2"),
 				new Sample(new BodyType("Sedan"), new Manufacturer("BMW"), "120"),
@@ -26,12 +47,25 @@ namespace Client.ViewModel
 				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Cayenne"),
 				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")
 				];
+
+			_filteredSamples = new List<Sample>();
 		}
 
-		public Sample[] Samples
+		private void ShomModels()
 		{
-			get => _samples;
-			set => SetProperty(ref _samples, value);
+			if (_selectedBodyType != null && _selectedManufacturer != null)
+			{
+				FilteredSamples = (from s in _allSamples
+								   where s.Manufacturer == _selectedManufacturer
+								   where s.BodyType == _selectedBodyType
+								   select s).ToList();
+			}
+		}
+
+		public List<Sample> FilteredSamples
+		{
+			get => _filteredSamples;
+			set => SetProperty(ref _filteredSamples, value);
 		}
 	}
 }

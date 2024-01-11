@@ -7,17 +7,17 @@ namespace Client.ViewModel
 {
 	public sealed class ManufacturerViewModel : MvxViewModel
 	{
-		private IMvxMessenger _messenger;
-		private Manufacturer[] _manufacturers;
+		private IMvxMessenger? _messenger;
+		private Manufacturer[]? _manufacturers;
 		private Manufacturer? _selectedItem;
 
-		public ManufacturerViewModel(IMvxMessenger messenger)
+		public ManufacturerViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
 			_manufacturers = [new Manufacturer("Audi"), new Manufacturer("BMW"), new Manufacturer("Porsche")];
 		}
 
-		public Manufacturer[] Manufacturers
+		public Manufacturer[]? Manufacturers
 		{
 			get => _manufacturers;
 			set => SetProperty(ref _manufacturers, value);

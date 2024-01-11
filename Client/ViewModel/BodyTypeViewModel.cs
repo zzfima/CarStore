@@ -8,16 +8,16 @@ namespace Client.ViewModel
 	public sealed class BodyTypeViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private BodyType[] _bodyTypes;
+		private BodyType[]? _bodyTypes;
 		private BodyType? _selectedItem;
 
 		public BodyTypeViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
-			_bodyTypes = [ new BodyType("Sedan"), new BodyType("SUV") ];
+			_bodyTypes = [new BodyType("Sedan"), new BodyType("SUV")];
 		}
 
-		public BodyType[] BodyTypes
+		public BodyType[]? BodyTypes
 		{
 			get => _bodyTypes;
 			set => SetProperty(ref _bodyTypes, value);

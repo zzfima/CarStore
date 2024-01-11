@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     <GroupBox Header="Car models">
-        <ListView ItemsSource="{Binding Samples}">
+        <ListView ItemsSource="{Binding FilteredSamples}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
