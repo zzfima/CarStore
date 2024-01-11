@@ -5,12 +5,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     <GroupBox Header="Car models">
-        <ListView ItemsSource="{Binding FilteredSamples}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding FilteredSamples}" SelectedItem="{Binding SelectedSample}" Grid.Row="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Content="Order" Grid.Row="1" Margin="5" HorizontalAlignment="Right" Command="{Binding OrderCommand}"/>
+        </Grid>
     </GroupBox>
 </UserControl>

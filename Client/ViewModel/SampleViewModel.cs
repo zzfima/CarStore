@@ -1,5 +1,6 @@
 ﻿using Client.Messages;
 using Client.Model;
+using MvvmCross.Commands;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 
@@ -16,6 +17,7 @@ namespace Client.ViewModel
 
 		private BodyType? _selectedBodyType;
 		private Manufacturer? _selectedManufacturer;
+		private Sample? _selectedSample;
 
 		public SampleViewModel(IMvxMessenger? messenger)
 		{
@@ -32,6 +34,8 @@ namespace Client.ViewModel
 				_selectedManufacturer = res.SelectedManufacturer;
 				ShomModels();
 			});
+
+			OrderCommand = new MvxCommand(() => _messenger?.Publish(new OrderCreated(this, _selectedSample)));
 
 			_allSamples = [
 				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A1"),
@@ -67,5 +71,13 @@ namespace Client.ViewModel
 			get => _filteredSamples;
 			set => SetProperty(ref _filteredSamples, value);
 		}
+
+		public Sample? SelectedSample
+		{
+			get => _selectedSample;
+			set => SetProperty(ref _selectedSample, value);
+		}
+
+		public IMvxCommand OrderCommand { get; }
 	}
 }
