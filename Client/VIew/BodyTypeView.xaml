@@ -6,11 +6,11 @@
              mc:Ignorable="d">
     <GroupBox Header="Body Types">
         <ListView ItemsSource="{Binding BodyTypes}">
-            <ListBox.ItemTemplate>
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </GroupBox>
 </UserControl>

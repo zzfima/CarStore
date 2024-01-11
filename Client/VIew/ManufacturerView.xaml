@@ -5,6 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     <GroupBox Header="Manufacturers">
-        <ListView ItemsSource="{Binding Manufacturers}"/>
+        <ListView ItemsSource="{Binding Manufacturers}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </GroupBox>
 </UserControl>

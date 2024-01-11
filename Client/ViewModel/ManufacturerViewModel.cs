@@ -1,4 +1,5 @@
-﻿using MvvmCross.Plugin.Messenger;
+﻿using Client.Model;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 
 namespace Client.ViewModel
@@ -6,14 +7,14 @@ namespace Client.ViewModel
 	public sealed class ManufacturerViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private string[] _manufacturers;
+		private Manufacturer[] _manufacturers;
 
 		public ManufacturerViewModel()
 		{
-			_manufacturers = new string[] { "Audi", "BMW", "Porsche" };
+			_manufacturers = new Manufacturer[] { new Manufacturer("Audi"), new Manufacturer("BMW"), new Manufacturer("Porsche") };
 		}
 
-		public string[] Manufacturers
+		public Manufacturer[] Manufacturers
 		{
 			get => _manufacturers;
 			set => SetProperty(ref _manufacturers, value);
