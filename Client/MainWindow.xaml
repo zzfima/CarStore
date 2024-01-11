@@ -5,10 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:View="clr-namespace:Client.View"
     x:Class="Client.MainWindow"
-    mc:Ignorable="d"
-    Title="Car Order" Height="550" Width="800">
-    
-        <Window.Resources>
+    mc:Ignorable="d" Height="550" Width="800">
+
+    <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
@@ -17,7 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -25,14 +24,22 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <View:ManufacturerView Grid.Column="0" Grid.Row="0" x:Name="manufacturersView" Margin="1"/>
-        <View:BodyTypeView Grid.Column="1" Grid.Row="0"  x:Name="bodyTypes" Margin="1"/>
-        <View:SampleView Grid.Column="2" Grid.Row="0"  x:Name="samples" Margin="1"/>
-        <View:OrderView Grid.Column="0" Grid.Row="1"  x:Name="orders" Margin="1"/>
+        <Label Grid.Row="0" Margin="1" Content="Car Order" Foreground="White" Grid.Column="0" Grid.ColumnSpan="3">
+            <Label.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="MediumPurple" Offset="0.0" />
+                    <GradientStop Color="Purple" Offset="1.0" />
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <View:ManufacturerView Grid.Column="0" Grid.Row="1" x:Name="manufacturersView" Margin="1"/>
+        <View:BodyTypeView Grid.Column="1" Grid.Row="1"  x:Name="bodyTypes" Margin="1"/>
+        <View:SampleView Grid.Column="2" Grid.Row="1"  x:Name="samples" Margin="1"/>
+        <View:OrderView Grid.Column="0" Grid.Row="2"  x:Name="orders" Margin="1"/>
 
     </Grid>
 </Window>
