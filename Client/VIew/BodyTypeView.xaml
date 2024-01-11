@@ -5,6 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     <GroupBox Header="Body Types">
-        <ListView ItemsSource="{Binding BodyTypes}"/>
+        <ListView ItemsSource="{Binding BodyTypes}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListView>
     </GroupBox>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using MvvmCross.Plugin.Messenger;
+﻿using Client.Model;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 
 namespace Client.ViewModel
@@ -6,14 +7,14 @@ namespace Client.ViewModel
 	public sealed class BodyTypeViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private string[] _bodyTypes;
+		private BodyType[] _bodyTypes;
 
 		public BodyTypeViewModel()
 		{
-			_bodyTypes = new string[] { "Sedan", "SUV" };
+			_bodyTypes = new BodyType[] { new BodyType("Sedan"), new BodyType("SUV") };
 		}
 
-		public string[] BodyTypes
+		public BodyType[] BodyTypes
 		{
 			get => _bodyTypes;
 			set => SetProperty(ref _bodyTypes, value);
