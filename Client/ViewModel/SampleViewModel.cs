@@ -12,7 +12,7 @@ namespace Client.ViewModel
 		public SampleViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
-			_samples = new Sample[] {
+			_samples = [
 				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A1"),
 				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A2"),
 				new Sample(new BodyType("Sedan"), new Manufacturer("BMW"), "120"),
@@ -24,7 +24,8 @@ namespace Client.ViewModel
 				new Sample(new BodyType("SUV"), new Manufacturer("BMW"), "X5"),
 				new Sample(new BodyType("SUV"), new Manufacturer("BMW"), "X6"),
 				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Cayenne"),
-				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")};
+				new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")
+				];
 		}
 
 		public Sample[] Samples
