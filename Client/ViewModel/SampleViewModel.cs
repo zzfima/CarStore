@@ -36,7 +36,11 @@ namespace Client.ViewModel
 				ShomModels();
 			});
 
-			OrderCommand = new MvxCommand(() => _messenger?.Publish(new OrderCreated(this, _selectedSample)));
+			OrderCommand = new MvxCommand(() =>
+			{
+				if (_selectedSample != null)
+					_messenger?.Publish(new OrderCreated(this, _selectedSample));
+			});
 
 			_allSamples = [
 				new Sample(new BodyType("Sedan"), new Manufacturer("Audi"), "A1"),
