@@ -9,8 +9,9 @@ namespace Client.ViewModel
 		private IMvxMessenger? _messenger;
 		private BodyType[] _bodyTypes;
 
-		public BodyTypeViewModel()
+		public BodyTypeViewModel(IMvxMessenger? messenger)
 		{
+			_messenger = messenger;
 			_bodyTypes = new BodyType[] { new BodyType("Sedan"), new BodyType("SUV") };
 		}
 

@@ -1,4 +1,5 @@
 ﻿using Client.ViewModel;
+using MvvmCross;
 using System.Windows;
 
 namespace Client
@@ -11,8 +12,9 @@ namespace Client
 		public MainWindow()
 		{
 			InitializeComponent();
-			manufacturersView.DataContext = new ManufacturerViewModel();
-			bodyTypes.DataContext = new BodyTypeViewModel();
+			manufacturersView.DataContext = Mvx.IoCProvider?.Resolve<ManufacturerViewModel>();
+			bodyTypes.DataContext = Mvx.IoCProvider?.Resolve<BodyTypeViewModel>();
+			samples.DataContext = Mvx.IoCProvider?.Resolve<SampleViewModel>();
 		}
 	}
 }
