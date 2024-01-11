@@ -1,4 +1,4 @@
-﻿using Client.Model;
+﻿using Server;
 
 namespace Client.Messages
 {

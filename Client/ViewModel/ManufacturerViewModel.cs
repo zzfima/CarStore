@@ -1,5 +1,5 @@
 ﻿using Client.Messages;
-using Client.Model;
+using Server;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;

@@ -1,7 +1,6 @@
 ﻿using Client.ViewModel;
 using MvvmCross;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Client
 {
