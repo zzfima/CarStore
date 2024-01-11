@@ -1,39 +1,29 @@
 ﻿using Server.Model;
-using System;
 using System.Data.SQLite;
 
 namespace Server
 {
 	public class CarsDbReader
 	{
-		public CarsDbReader() { }
-
 		public List<Manufacturer> ReadManufacturers()
 		{
-			string cs = @"Data Source = .\DB\DBcars.db;Version=3;New=True;Compress=True;";
-			using var connect = new SQLiteConnection(cs);
-			connect.Open();
+			string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
+			using var connection = new SQLiteConnection(cs);
+			connection.Open();
 
-			using (SQLiteCommand fmd = connect.CreateCommand())
+			List<Manufacturer> manufacturers = new List<Manufacturer>();
+			using (SQLiteCommand fmd = connection.CreateCommand())
 			{
-				SQLiteCommand sqlComm = new SQLiteCommand("select * from Manufacturer", connect);
+				SQLiteCommand sqlComm = new SQLiteCommand("select * from Manufacturer", connection);
 				SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
 				while (rdr.Read())
 				{
-					Console.WriteLine($"{rdr.GetInt32(0)} {rdr.GetString(1)}");
+					manufacturers.Add(new Manufacturer(rdr.GetString(1)));
 				}
 			}
 
-			//using var cmd = new SQLiteCommand(stm, con);
-			//using SQLiteDataReader rdr = cmd.ExecuteReader();
-
-			//while (rdr.Read())
-			//{
-			//	Console.WriteLine($"{rdr.GetInt32(0)} {rdr.GetString(1)}");
-			//}
-
-			return null;
+			return manufacturers;
 		}
 	}
 }

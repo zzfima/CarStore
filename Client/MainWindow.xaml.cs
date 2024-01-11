@@ -12,7 +12,7 @@ namespace Client
 		public MainWindow()
 		{
 			InitializeComponent();
-			manufacturersView.DataContext = new ManufacturerViewModel(null);
+			manufacturersView.DataContext = Mvx.IoCProvider?.Resolve<ManufacturerViewModel>();
 			bodyTypes.DataContext = Mvx.IoCProvider?.Resolve<BodyTypeViewModel>();
 			samples.DataContext = Mvx.IoCProvider?.Resolve<SampleViewModel>();
 			orders.DataContext = Mvx.IoCProvider?.Resolve<OrderViewModel>();

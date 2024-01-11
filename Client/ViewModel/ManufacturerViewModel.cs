@@ -7,7 +7,7 @@ using Server;
 
 namespace Client.ViewModel
 {
-    public sealed class ManufacturerViewModel : MvxViewModel
+	public sealed class ManufacturerViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
 		private ObservableCollection<Manufacturer>? _manufacturers;
@@ -17,9 +17,8 @@ namespace Client.ViewModel
 		{
 			_messenger = messenger;
 			CarsDbReader carsDbReader = new CarsDbReader();
-			var v = carsDbReader.ReadManufacturers();
-
-			_manufacturers = [new Manufacturer("Audi"), new Manufacturer("BMW"), new Manufacturer("Porsche")];
+			_manufacturers = new ObservableCollection<Manufacturer>(carsDbReader.ReadManufacturers());
+			//_manufacturers = [new Manufacturer("Audi"), new Manufacturer("BMW"), new Manufacturer("Porsche")];
 		}
 
 		public ObservableCollection<Manufacturer>? Manufacturers

@@ -7,17 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DB\cars.db" />
+    <None Remove="DB\CarsStore.db" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="DB\cars.db">
+    <EmbeddedResource Include="DB\CarsStore.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DB\cars.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
