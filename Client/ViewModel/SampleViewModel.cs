@@ -1,13 +1,13 @@
 ﻿using Client.Messages;
-using Server;
 using MvvmCross.Commands;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
+using Server.Model;
 
 namespace Client.ViewModel
 {
-	public sealed class SampleViewModel : MvxViewModel
+    public sealed class SampleViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
 		private ObservableCollection<Sample> _allSamples;

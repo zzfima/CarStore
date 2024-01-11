@@ -1,8 +1,8 @@
-﻿using Server;
+﻿using Server.Model;
 
 namespace Client.Messages
 {
-	public class BodyTypeChanged : MvvmCross.Plugin.Messenger.MvxMessage
+    public class BodyTypeChanged : MvvmCross.Plugin.Messenger.MvxMessage
 	{
 		public BodyType? SelectedBodyType { get; }
 		public BodyTypeChanged(object sender, BodyType? selectedBodyType) : base(sender)

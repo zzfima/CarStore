@@ -1,12 +1,12 @@
 ﻿using Client.Messages;
-using Server;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
+using Server.Model;
 
 namespace Client.ViewModel
 {
-	public sealed class ManufacturerViewModel : MvxViewModel
+    public sealed class ManufacturerViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
 		private ObservableCollection<Manufacturer>? _manufacturers;

@@ -1,12 +1,12 @@
 ﻿using Client.Messages;
-using Server;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
+using Server.Model;
 
 namespace Client.ViewModel
 {
-	public sealed class OrderViewModel : MvxViewModel
+    public sealed class OrderViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
 		private MvxSubscriptionToken? _tokenOrderAdded;
