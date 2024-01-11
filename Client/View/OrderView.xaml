@@ -9,7 +9,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding BodyType.Name}" ContentStringFormat="BodyType: {0},"/>
+                            <Label Content="{Binding Manufacturer.Name}" ContentStringFormat="Manufacturer: {0},"/>
+                            <Label Content="{Binding Name}" ContentStringFormat="Model: {0}"/>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -39,7 +39,7 @@
         <View:ManufacturerView Grid.Column="0" Grid.Row="1" x:Name="manufacturersView" Margin="1"/>
         <View:BodyTypeView Grid.Column="1" Grid.Row="1"  x:Name="bodyTypes" Margin="1"/>
         <View:SampleView Grid.Column="2" Grid.Row="1"  x:Name="samples" Margin="1"/>
-        <View:OrderView Grid.Column="0" Grid.Row="2"  x:Name="orders" Margin="1"/>
+        <View:OrderView Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2"  x:Name="orders" Margin="1"/>
 
     </Grid>
 </Window>
