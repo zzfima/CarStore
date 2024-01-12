@@ -1,4 +1,5 @@
 ﻿using Server.Model;
+//from here: https://www.c-sharpcorner.com/article/get-started-with-entity-framework-core-using-sqlite/
 
 namespace Server
 {
