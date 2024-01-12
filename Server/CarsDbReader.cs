@@ -1,5 +1,6 @@
 ﻿using Server.Model;
 using System.Data.SQLite;
+using System.Xml.Linq;
 
 namespace Server
 {
@@ -79,14 +80,16 @@ namespace Server
 			using (SQLiteCommand fmd = connection.CreateCommand())
 			{
 				var query = $@"
-					SELECT Sample.Name FROM Sample 
-					INNER JOIN Manufacturer ON Sample.ManufacturerID = Manufacturer.ID
-					INNER JOIN BodyType ON Sample.BodyTypeID = BodyType.ID
-					WHERE Manufacturer.Name = '{selectedSample.Manufacturer.Name}' AND BodyType.Name = '{selectedSample.BodyType.Name}'";
+					SELECT Sample.ID, Sample.Name FROM Sample 
+					WHERE Name = '{selectedSample.Name}'";
 
 				SQLiteCommand sqlComm = new SQLiteCommand(query, connection);
-				float f = 5;
-				sqlComm = new SQLiteCommand($"INSERT INTO \"Order\" (Sample_ID) VALUES({f});", connection);
+                SQLiteDataReader rdr = sqlComm.ExecuteReader();
+				string id = string.Empty;
+				while (rdr?.Read() ?? false)
+					id = rdr?.GetValue(0)?.ToString();
+
+				sqlComm = new SQLiteCommand($"INSERT INTO \"Order\" (Sample_ID) VALUES({id});", connection);
 				var res = sqlComm.ExecuteNonQuery();	
 			}
 		}
