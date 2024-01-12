@@ -20,7 +20,8 @@ namespace Client.ViewModel
 
 			_tokenOrderAdded = messenger?.Subscribe<OrderCreated>((res) =>
 			{
-				Orders.Add(res.SelectedSample);
+				var sample = carsDbReader.ReadSample(res.SelectedSample.Id);
+                Orders.Add(sample);
 				carsDbReader.WriteOrder(res.SelectedSample);
 			});
 			_orders = new ObservableCollection<Sample>();

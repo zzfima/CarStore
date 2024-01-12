@@ -40,5 +40,15 @@ namespace Server
                 db.SaveChanges();
             }
         }
+
+        public Sample? ReadSample(int id)
+        {
+            using (var db = new CarsStoreContext())
+            {
+                return (from s in db.Samples
+                        where s.Id == id
+                        select s)?.FirstOrDefault();
+            }
+        }
     }
 }

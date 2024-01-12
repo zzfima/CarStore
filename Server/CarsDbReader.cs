@@ -92,5 +92,10 @@ namespace Server
                 var res = sqlComm.ExecuteNonQuery();
             }
         }
+
+        public Sample? ReadSample(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
