@@ -64,7 +64,7 @@ namespace Client.ViewModel
         {
             if (_selectedBodyType != null && _selectedManufacturer != null)
             {
-                ICarsDBReader carsDbReader = new CarsDBReaderEF();
+                ICarsDBReader carsDbReader = new CarsDBReader();
                 FilteredSamples = new ObservableCollection<Sample>(carsDbReader.ReadSamples(_selectedBodyType, _selectedManufacturer));
             }
 
