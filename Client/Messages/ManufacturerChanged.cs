@@ -4,8 +4,8 @@ namespace Client.Messages
 {
     public class ManufacturerChanged : MvvmCross.Plugin.Messenger.MvxMessage
 	{
-		public Manufacturer? SelectedManufacturer { get; }
-		public ManufacturerChanged(object sender, Manufacturer? selectedManufacturer) : base(sender)
+		public ManufacturerRecord? SelectedManufacturer { get; }
+		public ManufacturerChanged(object sender, ManufacturerRecord? selectedManufacturer) : base(sender)
 		{
 			SelectedManufacturer = selectedManufacturer;
 		}

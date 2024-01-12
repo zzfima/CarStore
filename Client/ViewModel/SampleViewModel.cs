@@ -11,14 +11,14 @@ namespace Client.ViewModel
     public sealed class SampleViewModel : MvxViewModel
     {
         private IMvxMessenger? _messenger;
-        private ObservableCollection<Sample> _filteredSamples;
+        private ObservableCollection<SampleRecord> _filteredSamples;
 
         private MvxSubscriptionToken? _tokenBodyTypeChanged;
         private MvxSubscriptionToken? _tokenManufacturerChanged;
 
-        private BodyType? _selectedBodyType;
-        private Manufacturer? _selectedManufacturer;
-        private Sample? _selectedSample;
+        private BodyTypeRecord? _selectedBodyType;
+        private ManufacturerRecord? _selectedManufacturer;
+        private SampleRecord? _selectedSample;
 
         public SampleViewModel(IMvxMessenger? messenger)
         {
@@ -57,7 +57,7 @@ namespace Client.ViewModel
             //	new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")
             //	];
 
-            _filteredSamples = new ObservableCollection<Sample>();
+            _filteredSamples = new ObservableCollection<SampleRecord>();
         }
 
         private void ShomModels()
@@ -65,7 +65,7 @@ namespace Client.ViewModel
             if (_selectedBodyType != null && _selectedManufacturer != null)
             {
                 ICarsDBReader carsDbReader = new CarsDBReader();
-                FilteredSamples = new ObservableCollection<Sample>(carsDbReader.ReadSamples(_selectedBodyType, _selectedManufacturer));
+                FilteredSamples = new ObservableCollection<SampleRecord>(carsDbReader.ReadSamples(_selectedBodyType, _selectedManufacturer));
             }
 
             /*
@@ -79,13 +79,13 @@ namespace Client.ViewModel
 			*/
         }
 
-        public ObservableCollection<Sample> FilteredSamples
+        public ObservableCollection<SampleRecord> FilteredSamples
         {
             get => _filteredSamples;
             set => SetProperty(ref _filteredSamples, value);
         }
 
-        public Sample? SelectedSample
+        public SampleRecord? SelectedSample
         {
             get => _selectedSample;
             set => SetProperty(ref _selectedSample, value);

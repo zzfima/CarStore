@@ -1,4 +1,4 @@
 ﻿namespace Server.Model
 {
-    public record Sample(BodyType BodyType, Manufacturer Manufacturer, string Name);
+    public record SampleRecord(BodyTypeRecord BodyType, ManufacturerRecord Manufacturer, string Name);
 }

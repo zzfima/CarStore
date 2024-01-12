@@ -1,4 +1,4 @@
 ﻿namespace Server.Model
 {
-    public record BodyType(string Name);
+    public record BodyTypeRecord(string Name);
 }

@@ -6,51 +6,51 @@ namespace Server
 {
     public class CarsDBReader : ICarsDBReader
     {
-        public List<Manufacturer> ReadManufacturers()
+        public List<ManufacturerRecord> ReadManufacturers()
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<Manufacturer> manufacturers = new List<Manufacturer>();
+            List<ManufacturerRecord> manufacturers = new List<ManufacturerRecord>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 SQLiteCommand sqlComm = new SQLiteCommand("select * from Manufacturer", connection);
                 SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
                 while (rdr?.Read() ?? false)
-                    manufacturers.Add(new Manufacturer(rdr?.GetValue(1)?.ToString() ?? String.Empty));
+                    manufacturers.Add(new ManufacturerRecord(rdr?.GetValue(1)?.ToString() ?? String.Empty));
             }
 
             return manufacturers;
         }
 
-        public List<BodyType> ReadBodyTypes()
+        public List<BodyTypeRecord> ReadBodyTypes()
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<BodyType> bodyTypes = new List<BodyType>();
+            List<BodyTypeRecord> bodyTypes = new List<BodyTypeRecord>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 SQLiteCommand sqlComm = new SQLiteCommand("select * from BodyType", connection);
                 SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
                 while (rdr?.Read() ?? false)
-                    bodyTypes.Add(new BodyType(rdr?.GetValue(1)?.ToString() ?? String.Empty));
+                    bodyTypes.Add(new BodyTypeRecord(rdr?.GetValue(1)?.ToString() ?? String.Empty));
             }
 
             return bodyTypes;
         }
 
-        public List<Sample> ReadSamples(BodyType bodyType, Manufacturer manufacturer)
+        public List<SampleRecord> ReadSamples(BodyTypeRecord bodyType, ManufacturerRecord manufacturer)
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<Sample> samples = new List<Sample>();
+            List<SampleRecord> samples = new List<SampleRecord>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 var query = $@"
@@ -64,19 +64,19 @@ namespace Server
                 SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
                 while (rdr?.Read() ?? false)
-                    samples.Add(new Sample(bodyType, manufacturer, rdr?.GetValue(0)?.ToString() ?? String.Empty));
+                    samples.Add(new SampleRecord(bodyType, manufacturer, rdr?.GetValue(0)?.ToString() ?? String.Empty));
             }
 
             return samples;
         }
 
-        public void WriteOrder(Sample selectedSample)
+        public void WriteOrder(SampleRecord selectedSample)
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<BodyType> bodyTypes = new List<BodyType>();
+            List<BodyTypeRecord> bodyTypes = new List<BodyTypeRecord>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 var query = $@"

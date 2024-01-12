@@ -11,7 +11,7 @@ namespace Client.ViewModel
 	{
 		private IMvxMessenger? _messenger;
 		private MvxSubscriptionToken? _tokenOrderAdded;
-		private ObservableCollection<Sample> _orders;
+		private ObservableCollection<SampleRecord> _orders;
 
 		public OrderViewModel(IMvxMessenger? messenger)
 		{
@@ -23,10 +23,10 @@ namespace Client.ViewModel
 				Orders.Add(res.SelectedSample);
 				carsDbReader.WriteOrder(res.SelectedSample);
 			});
-			_orders = new ObservableCollection<Sample>();
+			_orders = new ObservableCollection<SampleRecord>();
 		}
 
-		public ObservableCollection<Sample> Orders
+		public ObservableCollection<SampleRecord> Orders
 		{
 			get => _orders;
 			set => SetProperty(ref _orders, value);

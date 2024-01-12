@@ -10,24 +10,24 @@ namespace Client.ViewModel
     public sealed class BodyTypeViewModel : MvxViewModel
 	{
 		private IMvxMessenger? _messenger;
-		private ObservableCollection<BodyType>? _bodyTypes;
-		private BodyType? _selectedItem;
+		private ObservableCollection<BodyTypeRecord>? _bodyTypes;
+		private BodyTypeRecord? _selectedItem;
 
 		public BodyTypeViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
 			ICarsDBReader carsDbReader = new CarsDBReader();
-			_bodyTypes = new ObservableCollection<BodyType>(carsDbReader.ReadBodyTypes());
+			_bodyTypes = new ObservableCollection<BodyTypeRecord>(carsDbReader.ReadBodyTypes());
 			//_bodyTypes = [new BodyType("Sedan"), new BodyType("SUV")];
 		}
 
-		public ObservableCollection<BodyType>? BodyTypes
+		public ObservableCollection<BodyTypeRecord>? BodyTypes
 		{
 			get => _bodyTypes;
 			set => SetProperty(ref _bodyTypes, value);
 		}
 
-		public BodyType? SelectedItem
+		public BodyTypeRecord? SelectedItem
 		{
 			get => _selectedItem;
 			set

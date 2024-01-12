@@ -1,4 +1,4 @@
 ﻿namespace Server.Model
 {
-    public record Manufacturer(string Name);
+    public record ManufacturerRecord(string Name);
 }
