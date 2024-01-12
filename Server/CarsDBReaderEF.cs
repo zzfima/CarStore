@@ -1,37 +1,35 @@
-﻿using Server.Model;
-using Server.Models;
+﻿using Server.Models;
 //from here: https://www.c-sharpcorner.com/article/get-started-with-entity-framework-core-using-sqlite/
 
 namespace Server
 {
     public class CarsDBReaderEF : ICarsDBReader
     {
-        public List<ManufacturerRecord> ReadManufacturers()
+        public List<Manufacturer> ReadManufacturers()
         {
-            List<ManufacturerRecord> manufacturers = new List<ManufacturerRecord>();
+            List<Manufacturer> manufacturers = new List<Manufacturer>();
             using (var db = new CarsStoreContext())
             {
-                //db.Items.Add(item);
-                db.SaveChanges();
+                var r = db.Manufacturers.ToList();
             }
             return manufacturers;
         }
 
-        public List<BodyTypeRecord> ReadBodyTypes()
+        public List<BodyType> ReadBodyTypes()
         {
-            List<BodyTypeRecord> bodyTypes = new List<BodyTypeRecord>();
+            List<BodyType> bodyTypes = new List<BodyType>();
 
             return bodyTypes;
         }
 
-        public List<SampleRecord> ReadSamples(BodyTypeRecord bodyType, ManufacturerRecord manufacturer)
+        public List<Sample> ReadSamples(BodyType bodyType, Manufacturer manufacturer)
         {
-            List<SampleRecord> samples = new List<SampleRecord>();
+            List<Sample> samples = new List<Sample>();
 
             return samples;
         }
 
-        public void WriteOrder(SampleRecord selectedSample)
+        public void WriteOrder(Sample selectedSample)
         {
 
         }

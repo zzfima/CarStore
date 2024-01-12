@@ -1,9 +1,9 @@
 ﻿using Client.Messages;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
-using System.Collections.ObjectModel;
-using Server.Model;
 using Server;
+using Server.Models;
+using System.Collections.ObjectModel;
 
 namespace Client.ViewModel
 {
@@ -11,7 +11,7 @@ namespace Client.ViewModel
 	{
 		private IMvxMessenger? _messenger;
 		private MvxSubscriptionToken? _tokenOrderAdded;
-		private ObservableCollection<SampleRecord> _orders;
+		private ObservableCollection<Sample> _orders;
 
 		public OrderViewModel(IMvxMessenger? messenger)
 		{
@@ -23,10 +23,10 @@ namespace Client.ViewModel
 				Orders.Add(res.SelectedSample);
 				carsDbReader.WriteOrder(res.SelectedSample);
 			});
-			_orders = new ObservableCollection<SampleRecord>();
+			_orders = new ObservableCollection<Sample>();
 		}
 
-		public ObservableCollection<SampleRecord> Orders
+		public ObservableCollection<Sample> Orders
 		{
 			get => _orders;
 			set => SetProperty(ref _orders, value);

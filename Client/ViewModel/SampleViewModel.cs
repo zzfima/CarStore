@@ -3,7 +3,7 @@ using MvvmCross.Commands;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using Server;
-using Server.Model;
+using Server.Models;
 using System.Collections.ObjectModel;
 
 namespace Client.ViewModel
@@ -11,14 +11,14 @@ namespace Client.ViewModel
     public sealed class SampleViewModel : MvxViewModel
     {
         private IMvxMessenger? _messenger;
-        private ObservableCollection<SampleRecord> _filteredSamples;
+        private ObservableCollection<Sample> _filteredSamples;
 
         private MvxSubscriptionToken? _tokenBodyTypeChanged;
         private MvxSubscriptionToken? _tokenManufacturerChanged;
 
-        private BodyTypeRecord? _selectedBodyType;
-        private ManufacturerRecord? _selectedManufacturer;
-        private SampleRecord? _selectedSample;
+        private BodyType? _selectedBodyType;
+        private Manufacturer? _selectedManufacturer;
+        private Sample? _selectedSample;
 
         public SampleViewModel(IMvxMessenger? messenger)
         {
@@ -57,7 +57,7 @@ namespace Client.ViewModel
             //	new Sample(new BodyType("SUV"), new Manufacturer("Porsche"), "Macan")
             //	];
 
-            _filteredSamples = new ObservableCollection<SampleRecord>();
+            _filteredSamples = new ObservableCollection<Sample>();
         }
 
         private void ShomModels()
@@ -65,7 +65,7 @@ namespace Client.ViewModel
             if (_selectedBodyType != null && _selectedManufacturer != null)
             {
                 ICarsDBReader carsDbReader = new CarsDBReader();
-                FilteredSamples = new ObservableCollection<SampleRecord>(carsDbReader.ReadSamples(_selectedBodyType, _selectedManufacturer));
+                FilteredSamples = new ObservableCollection<Sample>(carsDbReader.ReadSamples(_selectedBodyType, _selectedManufacturer));
             }
 
             /*
@@ -79,13 +79,13 @@ namespace Client.ViewModel
 			*/
         }
 
-        public ObservableCollection<SampleRecord> FilteredSamples
+        public ObservableCollection<Sample> FilteredSamples
         {
             get => _filteredSamples;
             set => SetProperty(ref _filteredSamples, value);
         }
 
-        public SampleRecord? SelectedSample
+        public Sample? SelectedSample
         {
             get => _selectedSample;
             set => SetProperty(ref _selectedSample, value);

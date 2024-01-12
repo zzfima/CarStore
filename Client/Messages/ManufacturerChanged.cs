@@ -1,13 +1,13 @@
-﻿using Server.Model;
+﻿using Server.Models;
 
 namespace Client.Messages
 {
     public class ManufacturerChanged : MvvmCross.Plugin.Messenger.MvxMessage
-	{
-		public ManufacturerRecord? SelectedManufacturer { get; }
-		public ManufacturerChanged(object sender, ManufacturerRecord? selectedManufacturer) : base(sender)
-		{
-			SelectedManufacturer = selectedManufacturer;
-		}
-	}
+    {
+        public Manufacturer? SelectedManufacturer { get; }
+        public ManufacturerChanged(object sender, Manufacturer? selectedManufacturer) : base(sender)
+        {
+            SelectedManufacturer = selectedManufacturer;
+        }
+    }
 }

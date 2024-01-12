@@ -1,13 +1,13 @@
-﻿using Server.Model;
+﻿using Server.Models;
 
 namespace Client.Messages
 {
     public class BodyTypeChanged : MvvmCross.Plugin.Messenger.MvxMessage
-	{
-		public BodyTypeRecord? SelectedBodyType { get; }
-		public BodyTypeChanged(object sender, BodyTypeRecord? selectedBodyType) : base(sender)
-		{
-			SelectedBodyType = selectedBodyType;
-		}
-	}
+    {
+        public BodyType? SelectedBodyType { get; }
+        public BodyTypeChanged(object sender, BodyType? selectedBodyType) : base(sender)
+        {
+            SelectedBodyType = selectedBodyType;
+        }
+    }
 }

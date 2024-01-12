@@ -1,56 +1,55 @@
-﻿using Server.Model;
+﻿using Server.Models;
 using System.Data.SQLite;
-using System.Xml.Linq;
 
 namespace Server
 {
     public class CarsDBReader : ICarsDBReader
     {
-        public List<ManufacturerRecord> ReadManufacturers()
+        public List<Manufacturer> ReadManufacturers()
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<ManufacturerRecord> manufacturers = new List<ManufacturerRecord>();
+            List<Manufacturer> manufacturers = new List<Manufacturer>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 SQLiteCommand sqlComm = new SQLiteCommand("select * from Manufacturer", connection);
                 SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
                 while (rdr?.Read() ?? false)
-                    manufacturers.Add(new ManufacturerRecord(rdr?.GetValue(1)?.ToString() ?? String.Empty));
+                    manufacturers.Add(new Manufacturer() { Id = rdr.GetInt32(0), Name = rdr.GetString(1) });
             }
 
             return manufacturers;
         }
 
-        public List<BodyTypeRecord> ReadBodyTypes()
+        public List<BodyType> ReadBodyTypes()
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<BodyTypeRecord> bodyTypes = new List<BodyTypeRecord>();
+            List<BodyType> bodyTypes = new List<BodyType>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 SQLiteCommand sqlComm = new SQLiteCommand("select * from BodyType", connection);
                 SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
                 while (rdr?.Read() ?? false)
-                    bodyTypes.Add(new BodyTypeRecord(rdr?.GetValue(1)?.ToString() ?? String.Empty));
+                    bodyTypes.Add(new BodyType() { Id = rdr.GetInt32(0), Name = rdr.GetString(1) });
             }
 
             return bodyTypes;
         }
 
-        public List<SampleRecord> ReadSamples(BodyTypeRecord bodyType, ManufacturerRecord manufacturer)
+        public List<Sample> ReadSamples(BodyType bodyType, Manufacturer manufacturer)
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<SampleRecord> samples = new List<SampleRecord>();
+            List<Sample> samples = new List<Sample>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 var query = $@"
@@ -64,19 +63,19 @@ namespace Server
                 SQLiteDataReader rdr = sqlComm.ExecuteReader();
 
                 while (rdr?.Read() ?? false)
-                    samples.Add(new SampleRecord(bodyType, manufacturer, rdr?.GetValue(0)?.ToString() ?? String.Empty));
+                    samples.Add(new Sample() { BodyType = bodyType, Manufacturer = manufacturer, Name = rdr.GetValue(0).ToString() });
             }
 
             return samples;
         }
 
-        public void WriteOrder(SampleRecord selectedSample)
+        public void WriteOrder(Sample selectedSample)
         {
             string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
             using var connection = new SQLiteConnection(cs);
             connection.Open();
 
-            List<BodyTypeRecord> bodyTypes = new List<BodyTypeRecord>();
+            List<BodyType> bodyTypes = new List<BodyType>();
             using (SQLiteCommand fmd = connection.CreateCommand())
             {
                 var query = $@"
@@ -85,11 +84,11 @@ namespace Server
 
                 SQLiteCommand sqlComm = new SQLiteCommand(query, connection);
                 SQLiteDataReader rdr = sqlComm.ExecuteReader();
-                string id = string.Empty;
+                int id = -1; ;
                 while (rdr?.Read() ?? false)
-                    id = rdr?.GetValue(0)?.ToString();
+                    id = rdr.GetInt32(0);
 
-                sqlComm = new SQLiteCommand($"INSERT INTO \"Order\" (Sample_ID) VALUES({id});", connection);
+                sqlComm = new SQLiteCommand($"INSERT INTO \"Order\" (Sample_ID) VALUES({id.ToString()});", connection);
                 var res = sqlComm.ExecuteNonQuery();
             }
         }

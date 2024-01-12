@@ -1,11 +1,11 @@
-﻿using Server.Model;
+﻿using Server.Models;
 
 namespace Client.Messages
 {
     public class OrderCreated : MvvmCross.Plugin.Messenger.MvxMessage
 	{
-		public SampleRecord? SelectedSample { get; }
-		public OrderCreated(object sender, SampleRecord? selectedSample) : base(sender)
+		public Sample? SelectedSample { get; }
+		public OrderCreated(object sender, Sample? selectedSample) : base(sender)
 		{
 			SelectedSample = selectedSample;
 		}

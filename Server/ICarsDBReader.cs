@@ -1,12 +1,12 @@
-﻿using Server.Model;
+﻿using Server.Models;
 
 namespace Server
 {
     public interface ICarsDBReader
     {
-        List<BodyTypeRecord> ReadBodyTypes();
-        List<ManufacturerRecord> ReadManufacturers();
-        List<SampleRecord> ReadSamples(BodyTypeRecord bodyType, ManufacturerRecord manufacturer);
-        void WriteOrder(SampleRecord selectedSample);
+        List<BodyType> ReadBodyTypes();
+        List<Manufacturer> ReadManufacturers();
+        List<Sample> ReadSamples(BodyType bodyType, Manufacturer manufacturer);
+        void WriteOrder(Sample selectedSample);
     }
 }
