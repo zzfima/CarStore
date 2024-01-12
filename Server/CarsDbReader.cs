@@ -68,5 +68,27 @@ namespace Server
 
 			return samples;
 		}
+
+		public void WriteOrder(Sample selectedSample)
+		{
+			string cs = @"Data Source = .\DB\CarsStore.db;Version=3;New=True;Compress=True;";
+			using var connection = new SQLiteConnection(cs);
+			connection.Open();
+			
+			List<BodyType> bodyTypes = new List<BodyType>();
+			using (SQLiteCommand fmd = connection.CreateCommand())
+			{
+				var query = $@"
+					SELECT Sample.Name FROM Sample 
+					INNER JOIN Manufacturer ON Sample.ManufacturerID = Manufacturer.ID
+					INNER JOIN BodyType ON Sample.BodyTypeID = BodyType.ID
+					WHERE Manufacturer.Name = '{selectedSample.Manufacturer.Name}' AND BodyType.Name = '{selectedSample.BodyType.Name}'";
+
+				SQLiteCommand sqlComm = new SQLiteCommand(query, connection);
+				float f = 5;
+				sqlComm = new SQLiteCommand($"INSERT INTO \"Order\" (Sample_ID) VALUES({f});", connection);
+				var res = sqlComm.ExecuteNonQuery();	
+			}
+		}
 	}
 }

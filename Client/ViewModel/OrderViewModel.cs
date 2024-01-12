@@ -3,6 +3,7 @@ using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using System.Collections.ObjectModel;
 using Server.Model;
+using Server;
 
 namespace Client.ViewModel
 {
@@ -15,10 +16,12 @@ namespace Client.ViewModel
 		public OrderViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
+			CarsDbReader carsDbReader = new CarsDbReader();
 
 			_tokenOrderAdded = messenger?.Subscribe<OrderCreated>((res) =>
 			{
 				Orders.Add(res.SelectedSample);
+				carsDbReader.WriteOrder(res.SelectedSample);
 			});
 			_orders = new ObservableCollection<Sample>();
 		}
