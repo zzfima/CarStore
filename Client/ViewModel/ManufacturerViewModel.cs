@@ -16,7 +16,7 @@ namespace Client.ViewModel
 		public ManufacturerViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
-			CarsDbReader carsDbReader = new CarsDbReader();
+			ICarsDBReader carsDbReader = new CarsDBReader();
 			_manufacturers = new ObservableCollection<Manufacturer>(carsDbReader.ReadManufacturers());
 			//_manufacturers = [new Manufacturer("Audi"), new Manufacturer("BMW"), new Manufacturer("Porsche")];
 		}
