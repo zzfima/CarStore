@@ -16,7 +16,7 @@ namespace Client.ViewModel
 		public OrderViewModel(IMvxMessenger? messenger)
 		{
 			_messenger = messenger;
-			ICarsDBReader carsDbReader = new CarsDBReader();
+			ICarsDBReader carsDbReader = new CarsDBReaderEF();
 
 			_tokenOrderAdded = messenger?.Subscribe<OrderCreated>((res) =>
 			{

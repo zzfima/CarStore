@@ -54,7 +54,7 @@ public partial class CarsStoreContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Order_ID").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("ID");
             entity.Property(e => e.SampleId).HasColumnName("Sample_ID");
 

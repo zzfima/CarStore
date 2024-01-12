@@ -7,31 +7,38 @@ namespace Server
     {
         public List<Manufacturer> ReadManufacturers()
         {
-            List<Manufacturer> manufacturers = new List<Manufacturer>();
             using (var db = new CarsStoreContext())
             {
-                var r = db.Manufacturers.ToList();
+                return db.Manufacturers.ToList();
             }
-            return manufacturers;
         }
 
         public List<BodyType> ReadBodyTypes()
         {
-            List<BodyType> bodyTypes = new List<BodyType>();
-
-            return bodyTypes;
+            using (var db = new CarsStoreContext())
+            {
+                return db.BodyTypes.ToList();
+            }
         }
 
         public List<Sample> ReadSamples(BodyType bodyType, Manufacturer manufacturer)
         {
-            List<Sample> samples = new List<Sample>();
-
-            return samples;
+            using (var db = new CarsStoreContext())
+            {
+                return (from s in db.Samples
+                        where s.Manufacturer == manufacturer
+                        where s.BodyType == bodyType
+                        select s).ToList();
+            }
         }
 
         public void WriteOrder(Sample selectedSample)
         {
-
+            using (var db = new CarsStoreContext())
+            {
+                db.Orders.Add(new Order() { SampleId = selectedSample.Id });
+                db.SaveChanges();
+            }
         }
     }
 }

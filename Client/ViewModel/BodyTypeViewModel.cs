@@ -16,7 +16,7 @@ namespace Client.ViewModel
         public BodyTypeViewModel(IMvxMessenger? messenger)
         {
             _messenger = messenger;
-            ICarsDBReader carsDbReader = new CarsDBReader();
+            ICarsDBReader carsDbReader = new CarsDBReaderEF();
             _bodyTypes = new ObservableCollection<BodyType>(carsDbReader.ReadBodyTypes());
             //_bodyTypes = [new BodyType("Sedan"), new BodyType("SUV")];
         }
